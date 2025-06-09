@@ -10,6 +10,39 @@ export const translations = {
       contact: "Contact",
       driver: "Taxi Companies"
     },
+    fleet: {
+      from: "From",
+  passengers: "Passengers",
+      bags: 'Bags',
+      limousine: 'Limousine',
+      stationW: 'Station Wagon',
+      minivan: "Mini Van",
+      sectionTitle: "Memorable journey",
+      sectionSubtitle: "Experience Luxury with Our Services",
+      carData: [
+        {
+          title: 'Limousine',
+          description: "Comfortable rides for everyday travel.",
+          passengers: 3,
+          bags: 3,
+          price: "32$"
+        },
+        {
+          title: 'Station Wagon',
+          description: "Premium cars for special moments.",
+          passengers: 4,
+          bags: 4,
+          price: "35$"
+        },
+        {
+          title: "Mini Van",
+          description: "Spacious travel for groups and families.",
+          passengers: 8,
+          bags:8,
+          price: "50$"
+        },
+      ]
+    },
 
   },
   nl: {
@@ -21,6 +54,40 @@ export const translations = {
       support: "Support",
       contact: "Contact",
       driver: "Taxibedrijven",
+    },
+   
+    fleet: {
+      from: "From",
+  passengers: "Passengers",
+      bags: 'Bags',
+      limousine: 'Limousine',
+      stationW: 'Station Wagon',
+      minivan: "Mini Van",
+      sectionTitle: "Memorable journey",
+      sectionSubtitle: "Experience Luxury with Our Services",
+      carData: [
+        {
+          title: 'Limousine',
+          description: "Comfortable rides for everyday travel.",
+          passengers: 3,
+          bags: 3,
+          price: "32$"
+        },
+        {
+          title: 'Station Wagon',
+          description: "Premium cars for special moments.",
+          passengers: 4,
+          bags: 4,
+          price: "35$"
+        },
+        {
+          title: "Mini Van",
+          description: "Spacious travel for groups and families.",
+          passengers: 8,
+          bags:8,
+          price: "50$"
+        },
+      ]
     },
 
 

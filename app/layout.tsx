@@ -30,9 +30,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
       <LanguageProvider>
+        
             <Header />
             <main className="flex-grow">{children}</main>
-            {/* <Footer /> */}
           </LanguageProvider>
       </body>
     </html>

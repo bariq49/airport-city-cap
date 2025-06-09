@@ -2,18 +2,24 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { ClientSideStrings } from '../translations/ClientSideTranslations';
 import { LanguageSelector } from './LanguageSelector';
-// import TopBar from './TopBar';
+import ContainerLayout from '../layouts/ContainerLayout';
 
 export default function Header() {
+    const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
     const [hoveredItem, setHoveredItem] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-    const { navigation } = ClientSideStrings(); 
+    
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 10);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+    
+    const { navigation } = ClientSideStrings();
 
     const navItems = [
         { name: navigation.home, path: '/' },
@@ -22,31 +28,22 @@ export default function Header() {
         { name: navigation.support, path: '/support' },
         { name: navigation.driver, path: '/driver' },
         { name: navigation.contact, path: '/contact' },
-
     ];
 
     return (
-        <>
-        {/* <TopBar/> */}
-        <header className="sticky top-0 z-50 bg-white shadow-sm md:bg-primary">
-
-            {/* <ContainerLayout> */}
-
+        <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+            scrolled ? "bg-black shadow-md py-4" : "py-4 bg-black/50"
+        }`}>
+            <ContainerLayout>
                 <div className="flex items-center justify-between py-2">
                     <div className="flex items-center">
-                        <Link href="/" className="flex items-center gap-2 text-3xl font-extrabold tracking-tight">
-                            <Image
-                                src=''
-                                alt="Taxi Gate"
-                                width={100}
-                                height={100}
-                                quality={100}
-                                className="md:h-12 h-12 w-auto"
-                            />
+                        <Link href="/" className="flex items-center gap-2 text-3xl text-white font-extrabold tracking-tight">
+                            Logo
                         </Link>
                     </div>
-<LanguageSelector/>
-                    <div className="flex items-center gap-8">
+                    
+                    <div className="flex items-center gap-4 md:gap-8">
+                        {/* Desktop Navigation */}
                         <nav className="hidden md:flex items-center space-x-8">
                             {navItems.map((item) => (
                                 <Link
@@ -55,7 +52,7 @@ export default function Header() {
                                     className={`relative px-1 py-2 text-base font-semibold transition-colors duration-300 ${
                                         pathname === item.path
                                             ? 'text-secondary'
-                                            : 'text-secondary hover:text-secondary/95'
+                                            : 'text-white hover:text-secondary'
                                     }`}
                                     onMouseEnter={() => setHoveredItem(item.name)}
                                     onMouseLeave={() => setHoveredItem(null)}
@@ -66,34 +63,44 @@ export default function Header() {
                                             pathname === item.path
                                                 ? 'w-full'
                                                 : hoveredItem === item.name
-                                                ? 'w-full'
-                                                : 'w-0'
+                                                    ? 'w-full'
+                                                    : 'w-0'
                                         }`}
                                     />
                                 </Link>
                             ))}
                         </nav>
 
-                        {/* Mobile Menu Button */}
-                        <button
-                            className="md:hidden text-gray-800 md:text-secondary"
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            aria-label="Toggle menu"
-                        >
-                            {mobileMenuOpen ? (
-                                <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            ) : (
-                                <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
-                                </svg>
-                            )}
-                        </button>
+                        {/* Language Selector - Desktop */}
+                        <div className="hidden md:block">
+                            <LanguageSelector />
+                        </div>
+
+                        {/* Mobile Menu Button and Language Selector */}
+                        <div className="flex items-center gap-4 md:hidden">
+                            <div className="md:hidden">
+                                <LanguageSelector />
+                            </div>
+                            <button
+                                className="text-white focus:outline-none"
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                aria-label="Toggle menu"
+                            >
+                                {mobileMenuOpen ? (
+                                    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                ) : (
+                                    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
+                                    </svg>
+                                )}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                {/* Mobile Navigation Menu */}
+                {/* Mobile Menu */}
                 <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
                     mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                 }`}>
@@ -104,8 +111,8 @@ export default function Header() {
                                 href={item.path}
                                 className={`block px-5 py-3.5 text-lg font-semibold rounded-lg transition-colors duration-200 ${
                                     pathname === item.path
-                                        ? 'text-primary bg-primary/10'
-                                        : 'text-gray-800 hover:text-primary hover:bg-primary/5'
+                                        ? 'text-secondary bg-secondary/10'
+                                        : 'text-white hover:text-secondary hover:bg-secondary/5'
                                 }`}
                                 onClick={() => setMobileMenuOpen(false)}
                             >
@@ -114,8 +121,7 @@ export default function Header() {
                         ))}
                     </div>
                 </div>
-            {/* </ContainerLayout> */}
+            </ContainerLayout>
         </header>
-        </>
     );
 }
