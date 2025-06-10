@@ -25,8 +25,7 @@ export default function Header() {
         { name: navigation.home, path: '/' },
         { name: navigation.about, path: '/about' },
         { name: navigation.services, path: '/services' },
-        { name: navigation.support, path: '/support' },
-        { name: navigation.driver, path: '/driver' },
+        { name: navigation.fleet, path: '/fleet' },
         { name: navigation.contact, path: '/contact' },
     ];
 
@@ -101,8 +100,8 @@ export default function Header() {
                 </div>
 
                 {/* Mobile Menu */}
-                <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-                    mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+                <div className={`md:hidden  overflow-hidden transition-all duration-300 ease-in-out ${
+                    mobileMenuOpen ? 'max-h-[500px] opacity-100 bg-black' : 'max-h-0 opacity-0'
                 }`}>
                     <div className="pb-6 space-y-4">
                         {navItems.map((item) => (

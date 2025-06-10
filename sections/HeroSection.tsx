@@ -48,7 +48,6 @@ export default function HeroSection({
             className="relative w-full pt-16 flex items-center justify-center overflow-hidden bg-black"
             style={{ minHeight }}
         >
-            {/* Background with dark fade-in effect */}
             <div
                 className={`absolute inset-0 z-0 transition-opacity duration-1000 ease-[cubic-bezier(0.65,0,0.35,1)] ${isVisible ? "opacity-100" : "opacity-0 bg-black"
                     }`}
