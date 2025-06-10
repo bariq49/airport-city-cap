@@ -1,4 +1,3 @@
-import ContainerLayout from "../layouts/ContainerLayout";
 
 
 export default function TopBar() {

@@ -6,7 +6,7 @@ import FleetCar from "@/sections/FLeetSection";
 import HeroSection from "@/sections/HeroSection";
 import ReadyToBook from "@/sections/ReadyToBook";
 import ServiceSec from "@/sections/ServiceSec";
-import { FaCar, FaCarAlt, FaChild, FaClock, FaMapMarkedAlt, FaMapMarkerAlt, FaMoneyBillWave, FaShieldAlt, FaShippingFast, FaTaxi } from "react-icons/fa";
+import { FaCar, FaClock, FaMapMarkedAlt,  FaShippingFast, FaTaxi } from "react-icons/fa";
 
 export default function Home() {
   return (
